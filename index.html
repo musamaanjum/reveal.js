@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/theme/sky.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
@@ -16,8 +16,96 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				
+				<section>
+					<h2>QEMU Overview for RISC-V and Toolchain</h2>
+					<h3>Muhammad Usama Anjum</h3>
+					<h4>Jun 2020</h4>
+				</section>
+
+				<section id="slide-outline">
+					<h2 id="org5552e01">Outline</h2>
+					<ol>
+						<li>QEMU internals overview</li>
+						<li>Hands on debugging QEMU</li>
+						<!--<li>Building RISC-V toolchain for dummies</li>-->
+					 </ol>
+					
+					<aside class="notes">
+					<p>
+					Notes
+					</p>
+					</aside>	
+				</section>
+
+				<section>
+					<h2>QEMU Overview</h2>
+					QEMU is a generic and open source machine emulator and virtualizer.<br>
+					<ol>
+						<li>Cross Architecture Emulation (TCG)</li>
+						<ul>
+							<li>QEMU SoftMMU</li>
+							<li>QEMU Linux</li>
+						</ul>
+						<li>QEMU for KVM</li>
+					</ol>
+				</section>
+
+				<section>
+				<h4 id="orgf539cab">Cross Architecture Emulation (TCG)</h4>
+				<p>
+				Android Emulator, Embedded Development, New Architectures
+				</p>
+
+				<div class="figure">
+				<p><img src="images/tcg-system-emulation.png" height="400" alt="tcg-system-emulation.png" style="border:none; background:none; box-shadow:none; object-fit:contain;" />
+				</p>
+				</div>
+				</section>
+
+				<section>
+					<h3>TCG</h3>
+					<div class="figure">
+						<p><img src="images/simplified_run_loop.png" height="400" alt="tcg-system-emulation.png" style="border:none; background:none; box-shadow:none; object-fit:contain;" />
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<ul>
+						<li>Decodetree</li>
+						<li>Debugging<br>${QEMU} -d in_asm,op,op_opt,out_asm [-s -S|-g] ${TESTCASE}<br>
+							log int,exec,op,op_opt (log all the micro-operations, register states, and interrupts/exceptions)
+						</li>
+					</ul>
+					
+
+				</section>
+
+				<section id="slide-org0ad9742">
+					<h3 id="org0ad9742">Prerequisites</h3>
+					<ul>
+						<li>sh/make/glibc/glib/fdt/python3</li>
+						<li>gcc or clang</li>
+						<li>apt build-dep qemu</li>	
+					</ul>
+				</section>
+
+				<section>
+					<h4>Building the QEMU</h4>
+					<ul>
+					<li>./configure --target-list=riscv32-softmmu,riscv32-linux-user --enable-debug --extra-cflags="-O0 -g3"  </li>
+					<li>make -j8</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Questions?</h2>
+				</section>
+				
+				<section>
+					<h1 class="title">Thank you!</h1>
+				</section>
 			</div>
 		</div>
 
